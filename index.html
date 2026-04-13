@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forex Rebate Calculator | Myfxback</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 12px;
+    width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin: 10px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+.result-box {
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.footer a {
+    color: #38bdf8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGO -->
+    <div style="text-align:center; margin-bottom:15px;">
+        <img src="https://myfxback.com/assets/myfxback-B87nvVWy.png" 
+             style="width:140px;">
+    </div>
+
+    <h2>Forex Rebate Calculator</h2>
+
+    <div class="row">
+        <label>Lot Size</label>
+        <select id="lot">
+            <option value="1">1 Lot</option>
+            <option value="0.1">0.1 Lot</option>
+            <option value="0.01">0.01 Lot</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label>Trades Per Day</label>
+        <input type="number" id="trades" value="10">
+    </div>
+
+    <div class="row">
+        <label>Rebate (Pips)</label>
+        <input type="number" id="rebate" value="0.7">
+    </div>
+
+    <button onclick="calculateRebate()">Calculate</button>
+
+    <div class="result-box">
+        <p>Monthly Profit: <b id="monthly">$0</b></p>
+        <p>Yearly Profit: <b id="yearly">$0</b></p>
+    </div>
+
+    <div class="footer">
+        Powered by <a href="https://myfxback.com" target="_blank">myfxback.com</a>
+    </div>
+
+</div>
+
+<script>
+function calculateRebate() {
+    let lot = parseFloat(document.getElementById("lot").value);
+    let trades = parseFloat(document.getElementById("trades").value);
+    let rebate = parseFloat(document.getElementById("rebate").value);
+
+    let pipValue = 10 * lot; // 1 lot = $10 per pip
+
+    let daily = trades * rebate * pipValue;
+    let monthly = daily * 22;
+    let yearly = monthly * 12;
+
+    document.getElementById("monthly").innerHTML = "$" + monthly.toFixed(2);
+    document.getElementById("yearly").innerHTML = "$" + yearly.toFixed(2);
+}
+</script>
+
+</body>
+</html>
